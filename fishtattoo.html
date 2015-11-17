@@ -24,7 +24,8 @@
 
       div#content-container {
         float: left;
-        padding: 30px;
+      padding: 30px;
+      width: 33%;
       }
 
       img#fishtattoo {
@@ -42,6 +43,25 @@
       div.imgph {
         float: right;
         margin: 0px;
+      }
+
+      div.member-container {
+        float: left;
+        padding-left: 10px;
+        padding-right: 10px;      
+        text-align: center;
+      }
+
+      div#vision-container {
+        border: 1px grey dashed;
+        padding: 30px;
+        margin: 10px;
+      }
+
+      div#vision-container p#vision-text-container {
+        font-size: large;
+        font-style: italic;
+        padding: 35px 0px 0px 0px;
       }
     </style>
     <script>
@@ -72,7 +92,36 @@
           contentContainer.appendChild(urlElement).appendChild(linkElement);
         }
 
-        b.appendChild(contentContainer);
+      visionContainer = document.createElement("div");
+      visionContainer.id = "vision-container";
+
+      memberSelector = document.createElement("div");
+      memberSelector.id = "member-selector";
+
+      visionTextContainer = document.createElement("p");
+      visionTextContainer.id = "vision-text-container";
+      visionTextContainer.innerHTML = "> The team vision <";
+
+      teamMembers = {"Mace": "Mace's vision is to die like Socrates did. In the meanwhile, a basic understanding of D3 and skills in applying to Software Studies research would be great.",
+      "Ognian": "Ognian's vision.",
+      "Yuto": "Yoto's vision."}
+
+      for (member in teamMembers) {
+        memberContainer = document.createElement("div");
+        memberContainer.className = "member-container";
+        memberContainer.id = member;
+        memberContainer.innerHTML = member;
+        memberContainer.onclick = function(m) {
+          visionTextContainer.innerHTML = teamMembers[this.id];
+        }
+        memberSelector.appendChild(memberContainer);
+      }
+
+      visionContainer.appendChild(memberSelector);
+      visionContainer.appendChild(visionTextContainer);
+      contentContainer.appendChild(visionContainer);
+
+      b.appendChild(contentContainer);
       };
       
       function addTattoo() {
